@@ -98,11 +98,14 @@ class userFrame {
     
     
     
-    func handshakeFriend ( name : String ) {
+    func handshakeFriend ( name : String , ip : String ) {
         
         guard var friendo = findFriend(name: name) else { return }
         let hs = secretHandshake(name: friendo.name, type: handshakeType.CALL, myk: nil )
-        let conn = ssbConnection(inbound: false, handshaked: false, terminated: false, handshake: hs, channel : nil )
+        
+        let conn = ssbConnection(name: name, ip : ip ,inbound: false, handshaked: false, terminated: false, handshake: hs, channel : nil )
+        
+        //friendo.connections.add(name: name, ip: ip)
         
         friendo.connections = conn; //only one for now
         
@@ -113,7 +116,7 @@ class userFrame {
             updateFriend(f:friendo)
             
             //not a null, lets handshake
-            mNet?.send(sender: (self.data?.name)!, to: friendo.name, ip: friendo.ip, mess: message(delType: deliveryType.DIRECT, sender: self.data!.name, target: friendo.name, type: messageType.HANDSHAKE_SEND1, text: "handshaka 1", data: seMes.data))
+            mNet?.send(sender: (self.data?.name)!, to: friendo.name, ip: friendo.ip, mess: message(delType: deliveryType.DIRECT, fromIp : self.data!.ip, sender: self.data!.name, target: friendo.name, type: messageType.HANDSHAKE_SEND1, text: "handshaka 1", data: seMes.data))
             
         }
         
@@ -155,7 +158,7 @@ class userFrame {
         
         if let encryptedMessage = friendo.connections?.channel?.say(message: _message) {
             
-            mNet?.send(sender: (self.data?.name)!, to: friendo.name, ip: friendo.ip, mess: message(delType: deliveryType.DIRECT, sender: self.data!.name, target: friendo.name, type: messageType.SAY, text: "", data: encryptedMessage))
+            mNet?.send(sender: (self.data?.name)!, to: friendo.name, ip: friendo.ip, mess: message(delType: deliveryType.DIRECT, fromIp :(self.data?.ip)!,  sender: self.data!.name, target: friendo.name, type: messageType.SAY, text: "", data: encryptedMessage))
             
         }
         
@@ -164,7 +167,7 @@ class userFrame {
     func advertise () {
         
         //THIS is going to so bite me on the back
-        let m = message(delType: deliveryType.MULTICAST, sender: (self.data?.name)!, target: "", type: messageType.ADVERTISE, text: (self.data?.ip)!, data: self.data?.mySsbKeys?.publicKey)    //send pub key to everyboody
+        let m = message(delType: deliveryType.MULTICAST, fromIp: (self.data?.name)!, sender: (self.data?.name)!, target: "", type: messageType.ADVERTISE, text: (self.data?.ip)!, data: self.data?.mySsbKeys?.publicKey)    //send pub key to everyboody
         
         mNet?.broadcast(mess: m)
         
@@ -194,14 +197,14 @@ class userFrame {
             }
             
             let hs = secretHandshake(name: friendo!.name, type: handshakeType.RESPONSE, myk: nil )
-            let conn = ssbConnection(inbound: true, handshaked: false, terminated: false, handshake: hs , channel : nil )
+            let conn = ssbConnection(name: m.sender, ip: m.fromIp, inbound: true, handshaked: false, terminated: false, handshake: hs , channel : nil )
             friendo!.connections = conn; //only one for now
             
             updateFriend(f:friendo!)
             
             if let seMes = friendo!.connections?.handshake?.receiveHandshakeSEND(data: m.data as! Data) {
                 
-                mNet?.send(sender: (self.data?.name)!, to: friendo!.name, ip: friendo!.ip, mess: message(delType: deliveryType.DIRECT, sender: self.data!.name, target: m.sender, type: messageType.HANDSHAKE_REPLY1, text: "shake reply 1", data: seMes.data))
+                mNet?.send(sender: (self.data?.name)!, to: friendo!.name, ip: friendo!.ip, mess: message(delType: deliveryType.DIRECT, fromIp: (self.data?.ip)!, sender: self.data!.name, target: m.sender, type: messageType.HANDSHAKE_REPLY1, text: "shake reply 1", data: seMes.data))
                 
             }
             
@@ -222,7 +225,7 @@ class userFrame {
             if let seMes = conn?.handshake?.receiveHandshakeREPLY(data: m.data as! Data) {
                 
                 updateFriend(f:friendo)
-                mNet?.send(sender: (self.data?.name)!, to: friendo.name, ip: friendo.ip, mess: message(delType: deliveryType.DIRECT, sender: self.data!.name, target: m.sender, type: messageType.HANDSHAKE_SEND2, text: "shake reply 2", data: seMes.data))
+                mNet?.send(sender: (self.data?.name)!, to: friendo.name, ip: friendo.ip, mess: message(delType: deliveryType.DIRECT , fromIp: (self.data?.name)!, sender: self.data!.name, target: m.sender, type: messageType.HANDSHAKE_SEND2, text: "shake reply 2", data: seMes.data))
                 
             }
             
@@ -235,7 +238,7 @@ class userFrame {
             
             if let seMes = friendo.connections?.handshake?.receiveHandshakeSEND(data: m.data as! Data) {
                 
-                mNet?.send(sender: (self.data?.name)!, to: friendo.name, ip: friendo.ip, mess: message(delType: deliveryType.DIRECT, sender: self.data!.name, target: m.sender, type: messageType.HANDSHAKE_REPLY2, text: "shake reply 2", data: seMes.data))
+                mNet?.send(sender: (self.data?.name)!, to: friendo.name, ip: friendo.ip, mess: message(delType: deliveryType.DIRECT, fromIp: (self.data?.name)!, sender: self.data!.name, target: m.sender, type: messageType.HANDSHAKE_REPLY2, text: "shake reply 2", data: seMes.data))
                 
                 //THIS IS A SILLY IDEA. hack for now
                 let hpke = friendo.connections?.handshake?.targetEphPublicKey
@@ -316,7 +319,7 @@ class userFrame {
                 }
                 
                     
-            handshakeFriend(name: friendo.name )
+            handshakeFriend(name: friendo.name ,ip: friendo.ip )
                 
                 return;
             }
@@ -326,7 +329,7 @@ class userFrame {
             //add this exciting new acquintance immediately and start handshaking, baby
             if let friendo = addFriend(friend: friend(name: m.sender, ip: m.text!, publicKey: m.data, ephKey: nil, connections: nil)) {
                 
-                handshakeFriend(name: friendo.name )
+                handshakeFriend(name: friendo.name , ip : friendo.ip )
                 
             }
             

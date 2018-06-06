@@ -31,6 +31,7 @@ typealias messageBox = [message?]
 struct message {
     
     let delType : deliveryType
+    let fromIp : String
     let sender : String
     let target : String
     let type : messageType

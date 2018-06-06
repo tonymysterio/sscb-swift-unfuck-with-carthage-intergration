@@ -19,6 +19,8 @@ struct scuttlers  {
 
 struct ssbConnection {
     
+    var name : String
+    var ip : String
     var inbound = false;
     var handshaked = false;
     var terminated = false;
@@ -28,13 +30,33 @@ struct ssbConnection {
     
 }
 
+class ssbConnections {
+    
+    var data = [ssbConnection?]()
+    
+    func add (name:String, ip: String) -> ssbConnection? {
+        
+        for f in data {
+            
+            if (f?.name == name) { return nil }
+            
+        }
+    
+        let nc = ssbConnection(name: name, ip: ip, inbound: false, handshaked: false, terminated: false, handshake: nil, channel: nil)
+        data.append(nc)
+        
+        return nc
+    }
+    
+}
+
 struct friend : Hashable,Equatable {
     
     var name :String
     var ip : String
     var publicKey : Box.PublicKey?
     var ephKey : Data?
-    var connections : ssbConnection?
+    var connections : ssbConnection? //ssbConnections();
     
     var hashValue: Int {
         return name.hashValue ^ ip.hashValue &* 16777619
