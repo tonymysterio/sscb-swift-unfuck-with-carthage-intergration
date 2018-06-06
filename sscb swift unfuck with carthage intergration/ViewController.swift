@@ -1,9 +1,9 @@
 //
 //  ViewController.swift
-//  sscb swift unfuck with carthage intergration
+//  sscb swift
 //
-//  Created by sami on 2018/06/04.
-//  Copyright © 2018年 osuuskunta hastur. All rights reserved.
+//  Created by sami on 2018/06/01.
+//  Copyright © 2018年 pancristal. All rights reserved.
 //
 
 import UIKit

@@ -7,21 +7,62 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		260CA90A20C4F3B8000D09D4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260CA90920C4F3B8000D09D4 /* AppDelegate.swift */; };
-		260CA90C20C4F3B8000D09D4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260CA90B20C4F3B8000D09D4 /* ViewController.swift */; };
 		260CA90F20C4F3B8000D09D4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 260CA90D20C4F3B8000D09D4 /* Main.storyboard */; };
 		260CA91120C4F3BB000D09D4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 260CA91020C4F3BB000D09D4 /* Assets.xcassets */; };
 		260CA91420C4F3BB000D09D4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 260CA91220C4F3BB000D09D4 /* LaunchScreen.storyboard */; };
+		260CA92A20C4F3CF000D09D4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260CA91C20C4F3CF000D09D4 /* AppDelegate.swift */; };
+		260CA92E20C4F3CF000D09D4 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 260CA92220C4F3CF000D09D4 /* Info.plist */; };
+		260CA92F20C4F3CF000D09D4 /* ssb-keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260CA92520C4F3CF000D09D4 /* ssb-keys.swift */; };
+		260CA93020C4F3CF000D09D4 /* ssbkeystest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260CA92620C4F3CF000D09D4 /* ssbkeystest.swift */; };
+		260CA93120C4F3CF000D09D4 /* ssb-ref.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260CA92820C4F3CF000D09D4 /* ssb-ref.swift */; };
+		260CA93220C4F3CF000D09D4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260CA92920C4F3CF000D09D4 /* ViewController.swift */; };
+		260CA93420C4F4AC000D09D4 /* Sodium.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 260CA93320C4F4AB000D09D4 /* Sodium.framework */; };
+		260CA93520C4F4AC000D09D4 /* Sodium.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 260CA93320C4F4AB000D09D4 /* Sodium.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		267D323120C6126F0025E382 /* sercretHandshake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267D323020C6126F0025E382 /* sercretHandshake.swift */; };
+		267D323420C653440025E382 /* messageBus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267D323320C653440025E382 /* messageBus.swift */; };
+		267D323620C7885E0025E382 /* ssb-channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267D323520C7885E0025E382 /* ssb-channel.swift */; };
+		267D323920C7A7540025E382 /* networkAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267D323820C7A7540025E382 /* networkAdapter.swift */; };
+		267D323D20C7B6860025E382 /* userDefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267D323C20C7B6860025E382 /* userDefs.swift */; };
+		267D323F20C7B7100025E382 /* processUserMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267D323E20C7B7100025E382 /* processUserMessages.swift */; };
+		26CE343320C51B61005FC3D5 /* private-box.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CE343220C51B61005FC3D5 /* private-box.swift */; };
+		26CE343620C60DF9005FC3D5 /* userHarness.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CE343520C60DF9005FC3D5 /* userHarness.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		260CA93620C4F4AC000D09D4 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				260CA93520C4F4AC000D09D4 /* Sodium.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		260CA90620C4F3B8000D09D4 /* sscb swift unfuck with carthage intergration.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "sscb swift unfuck with carthage intergration.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		260CA90920C4F3B8000D09D4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		260CA90B20C4F3B8000D09D4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		260CA90E20C4F3B8000D09D4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		260CA91020C4F3BB000D09D4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		260CA91320C4F3BB000D09D4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		260CA91520C4F3BB000D09D4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		260CA91C20C4F3CF000D09D4 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = "sscb swift/AppDelegate.swift"; sourceTree = "<group>"; };
+		260CA92220C4F3CF000D09D4 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		260CA92520C4F3CF000D09D4 /* ssb-keys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ssb-keys.swift"; sourceTree = "<group>"; };
+		260CA92620C4F3CF000D09D4 /* ssbkeystest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ssbkeystest.swift; sourceTree = "<group>"; };
+		260CA92820C4F3CF000D09D4 /* ssb-ref.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ssb-ref.swift"; sourceTree = "<group>"; };
+		260CA92920C4F3CF000D09D4 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		260CA93320C4F4AB000D09D4 /* Sodium.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sodium.framework; path = "sscb swift unfuck with carthage intergration/Carthage/Build/iOS/Sodium.framework"; sourceTree = "<group>"; };
+		267D323020C6126F0025E382 /* sercretHandshake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sercretHandshake.swift; sourceTree = "<group>"; };
+		267D323320C653440025E382 /* messageBus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = messageBus.swift; sourceTree = "<group>"; };
+		267D323520C7885E0025E382 /* ssb-channel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ssb-channel.swift"; sourceTree = "<group>"; };
+		267D323820C7A7540025E382 /* networkAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = networkAdapter.swift; sourceTree = "<group>"; };
+		267D323C20C7B6860025E382 /* userDefs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userDefs.swift; sourceTree = "<group>"; };
+		267D323E20C7B7100025E382 /* processUserMessages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = processUserMessages.swift; sourceTree = "<group>"; };
+		26CE343220C51B61005FC3D5 /* private-box.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "private-box.swift"; sourceTree = "<group>"; };
+		26CE343520C60DF9005FC3D5 /* userHarness.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userHarness.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				260CA93420C4F4AC000D09D4 /* Sodium.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -38,6 +80,7 @@
 		260CA8FD20C4F3B8000D09D4 = {
 			isa = PBXGroup;
 			children = (
+				260CA93320C4F4AB000D09D4 /* Sodium.framework */,
 				260CA90820C4F3B8000D09D4 /* sscb swift unfuck with carthage intergration */,
 				260CA90720C4F3B8000D09D4 /* Products */,
 			);
@@ -54,14 +97,90 @@
 		260CA90820C4F3B8000D09D4 /* sscb swift unfuck with carthage intergration */ = {
 			isa = PBXGroup;
 			children = (
-				260CA90920C4F3B8000D09D4 /* AppDelegate.swift */,
-				260CA90B20C4F3B8000D09D4 /* ViewController.swift */,
+				260CA91B20C4F3CF000D09D4 /* sscb swift */,
+				260CA91C20C4F3CF000D09D4 /* AppDelegate.swift */,
+				260CA92920C4F3CF000D09D4 /* ViewController.swift */,
 				260CA90D20C4F3B8000D09D4 /* Main.storyboard */,
 				260CA91020C4F3BB000D09D4 /* Assets.xcassets */,
 				260CA91220C4F3BB000D09D4 /* LaunchScreen.storyboard */,
 				260CA91520C4F3BB000D09D4 /* Info.plist */,
 			);
 			path = "sscb swift unfuck with carthage intergration";
+			sourceTree = "<group>";
+		};
+		260CA91B20C4F3CF000D09D4 /* sscb swift */ = {
+			isa = PBXGroup;
+			children = (
+				26CE343420C60DC9005FC3D5 /* testHarness */,
+				260CA92220C4F3CF000D09D4 /* Info.plist */,
+				260CA92320C4F3CF000D09D4 /* New Group */,
+				260CA92420C4F3CF000D09D4 /* ssb-keys */,
+				260CA92720C4F3CF000D09D4 /* ssb-ref */,
+			);
+			path = "sscb swift";
+			sourceTree = "<group>";
+		};
+		260CA92320C4F3CF000D09D4 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		260CA92420C4F3CF000D09D4 /* ssb-keys */ = {
+			isa = PBXGroup;
+			children = (
+				260CA92520C4F3CF000D09D4 /* ssb-keys.swift */,
+				26CE343220C51B61005FC3D5 /* private-box.swift */,
+				267D323020C6126F0025E382 /* sercretHandshake.swift */,
+				267D323520C7885E0025E382 /* ssb-channel.swift */,
+			);
+			path = "ssb-keys";
+			sourceTree = "<group>";
+		};
+		260CA92720C4F3CF000D09D4 /* ssb-ref */ = {
+			isa = PBXGroup;
+			children = (
+				260CA92820C4F3CF000D09D4 /* ssb-ref.swift */,
+			);
+			path = "ssb-ref";
+			sourceTree = "<group>";
+		};
+		267D323220C653300025E382 /* messageBus */ = {
+			isa = PBXGroup;
+			children = (
+				267D323320C653440025E382 /* messageBus.swift */,
+			);
+			path = messageBus;
+			sourceTree = "<group>";
+		};
+		267D323720C7A73D0025E382 /* networkAdapter */ = {
+			isa = PBXGroup;
+			children = (
+				267D323820C7A7540025E382 /* networkAdapter.swift */,
+			);
+			path = networkAdapter;
+			sourceTree = "<group>";
+		};
+		267D323A20C7B6660025E382 /* scuttlers */ = {
+			isa = PBXGroup;
+			children = (
+				267D323C20C7B6860025E382 /* userDefs.swift */,
+				26CE343520C60DF9005FC3D5 /* userHarness.swift */,
+				267D323E20C7B7100025E382 /* processUserMessages.swift */,
+			);
+			path = scuttlers;
+			sourceTree = "<group>";
+		};
+		26CE343420C60DC9005FC3D5 /* testHarness */ = {
+			isa = PBXGroup;
+			children = (
+				267D323A20C7B6660025E382 /* scuttlers */,
+				267D323720C7A73D0025E382 /* networkAdapter */,
+				267D323220C653300025E382 /* messageBus */,
+				260CA92620C4F3CF000D09D4 /* ssbkeystest.swift */,
+			);
+			path = testHarness;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,6 +193,7 @@
 				260CA90220C4F3B8000D09D4 /* Sources */,
 				260CA90320C4F3B8000D09D4 /* Frameworks */,
 				260CA90420C4F3B8000D09D4 /* Resources */,
+				260CA93620C4F4AC000D09D4 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -125,6 +245,7 @@
 				260CA91420C4F3BB000D09D4 /* LaunchScreen.storyboard in Resources */,
 				260CA91120C4F3BB000D09D4 /* Assets.xcassets in Resources */,
 				260CA90F20C4F3B8000D09D4 /* Main.storyboard in Resources */,
+				260CA92E20C4F3CF000D09D4 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,8 +256,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				260CA90C20C4F3B8000D09D4 /* ViewController.swift in Sources */,
-				260CA90A20C4F3B8000D09D4 /* AppDelegate.swift in Sources */,
+				267D323120C6126F0025E382 /* sercretHandshake.swift in Sources */,
+				260CA93120C4F3CF000D09D4 /* ssb-ref.swift in Sources */,
+				267D323D20C7B6860025E382 /* userDefs.swift in Sources */,
+				267D323920C7A7540025E382 /* networkAdapter.swift in Sources */,
+				267D323620C7885E0025E382 /* ssb-channel.swift in Sources */,
+				26CE343320C51B61005FC3D5 /* private-box.swift in Sources */,
+				260CA92A20C4F3CF000D09D4 /* AppDelegate.swift in Sources */,
+				267D323F20C7B7100025E382 /* processUserMessages.swift in Sources */,
+				267D323420C653440025E382 /* messageBus.swift in Sources */,
+				260CA92F20C4F3CF000D09D4 /* ssb-keys.swift in Sources */,
+				26CE343620C60DF9005FC3D5 /* userHarness.swift in Sources */,
+				260CA93220C4F3CF000D09D4 /* ViewController.swift in Sources */,
+				260CA93020C4F3CF000D09D4 /* ssbkeystest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,7 +414,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 86ZK99Q6D8;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/sscb\\ swift\\ unfuck\\ with\\ carthage\\ intergration/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "sscb swift unfuck with carthage intergration/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -300,7 +437,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 86ZK99Q6D8;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/sscb\\ swift\\ unfuck\\ with\\ carthage\\ intergration/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "sscb swift unfuck with carthage intergration/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

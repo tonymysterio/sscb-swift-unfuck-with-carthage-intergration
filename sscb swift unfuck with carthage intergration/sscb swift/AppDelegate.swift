@@ -1,9 +1,9 @@
 //
 //  AppDelegate.swift
-//  sscb swift unfuck with carthage intergration
+//  sscb swift
 //
-//  Created by sami on 2018/06/04.
-//  Copyright © 2018年 osuuskunta hastur. All rights reserved.
+//  Created by sami on 2018/06/01.
+//  Copyright © 2018年 pancristal. All rights reserved.
 //
 
 import UIKit
@@ -16,6 +16,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        let mu = SsbKeysTest()
+        mu.test();
+        
+        let linku : ssbref = "%Lihvp+fMdt5CihjbOY6eZc0qCe0eKsrN2wfgXV2E3PM=.sha25s"
+        let aa = linku.isLink
+        
+        //check if a string is a feed id
+        let feed : ssbref = "@nUtgCIpqOsv6k5mnWKA4JeJVkJTd9Oz2gmv6rojQeXU=.ed25519"
+        let bb = feed.isFeedId
+        
+        //check if a string is a message id
+        let msg : ssbref = "%MPB9vxHO0pvi2ve2wh6Do05ZrV7P6ZjUQ+IEYnzLfTs=.sha256"
+        let cc = msg.isMsgId
+        
+        //check if a string is a blob id
+        let blob : ssbref = "&Pe5kTo/V/w4MToasp1IuyMrMcCkQwDOdyzbyD5fy4ac=.sha256"
+        let dd = blob.isBlobId
+        
+        
+        let gm : ssbref = "DIBDIB"
+        let b = gm.isLink
+        
+        //ref.isLink('%Lihvp+fMdt5CihjbOY6eZc0qCe0eKsrN2wfgXV2E3PM=.sha25s')
+        let nub : ssbref = "http://localhost:7777/#/msg/%25pGzeEydYdHjKW1iIchR0Yumydsr3QSp8+FuYcwVwi8Q=.sha256?foo=bar"
+        //let nub : ssbref = "http://www.fi:7777/"
+        let bm = nub.extract
         return true
     }
 
