@@ -50,7 +50,7 @@ class SsbKeysTest {
         //let currentHost = mm.current().localizedName ?? ""
         
         
-        uunot.data.insert(userFrame(name: "ota", ip: "home" ,mb: _njetwork), at: 0)
+        uunot.data.insert(userFrame(name: "ohta", ip: "home" ,mb: _njetwork), at: 0)
         //uunot.data.insert(userFrame(name: "Mr Kijewski", ip: "Alcohole Galaxy",mb: _njetwork), at: 1)
         //uunot.data.insert(userFrame(name: "Wojciec", ip: "rainbow gathering",mb: _njetwork  ), at: 2)
         

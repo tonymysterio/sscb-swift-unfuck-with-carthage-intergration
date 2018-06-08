@@ -39,7 +39,7 @@ class HWnetworkAdapter {
     
     //throw and receive stuff over realnet
     lazy var netInfo = getIFAddresses()     //get my host name
-    lazy var concurrentQueue = DispatchQueue(label: "com.queue.broadcastUDPtoLocalNetwork", attributes: .concurrent)
+    lazy var concurrentQueue = DispatchQueue(label: "com.queue.broadcastUDPtoLocalNetwork") //, attributes: .utility)
     
     let broadcastPort : Int32 = 8883;
     
@@ -120,6 +120,8 @@ class HWnetworkAdapter {
     
     func debuMess ( _ m : String ) {
         
+        return
+            
         concurrentQueue.async {
             
             

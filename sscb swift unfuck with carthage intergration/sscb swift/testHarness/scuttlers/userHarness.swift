@@ -559,7 +559,7 @@ class userFrame {
                 
                 let fup = String(decoding: mdat, as: UTF8.self)
                 
-                let m = "encrypted message from "+friendo.name+"@"+friendo.ip+" : "+fup
+                let m = "||||||||  encrypted message from "+friendo.name+"@"+friendo.ip+" : "+fup
                 mNet?.debuMess(m)
                 //print(m)
             
