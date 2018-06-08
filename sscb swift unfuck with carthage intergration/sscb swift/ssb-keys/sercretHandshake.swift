@@ -83,6 +83,24 @@ class secretHandshake  {
     
     //returns a string to talk to the recipient
     
+    
+    /*unc continueHandshake () {
+        
+        if terminated  { return }
+        switch type {
+        case handshakeType.CALL:
+            
+        case handshakeType.RESPONSE:
+       
+        default:
+            <#code#>
+        }
+        
+        
+        
+    }
+    */
+    
     func startHandshaking ( targetPubKey : Box.PublicKey ) -> handshakeMessage? {
         
         //if type != nil { return nil }

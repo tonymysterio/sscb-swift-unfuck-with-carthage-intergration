@@ -27,22 +27,39 @@ class networkAdapter {
         hwb = HWnetworkAdapter()
     }
     
+    func debuMess ( _ m: String) {
+        
+        print(m)
+        hwb?.debuMess(m)
+        
+    }
+    
     func read (name: String) -> messageBox? {
+        
+        
         
         return mb?.read(me: name)
         
     }
     
+    //just send data to ip
+    func rawSend (ip : String ,sdata : Data ){
+     
+        hwb?.rawSend(ip: ip, sdata: sdata)
+    
+    }
+    
     func send (sender : String, to : String, ip : String , mess : message) {
         
-        mb?.send(m: mess)
+        hwb?.send(sender: sender, to: to, ip: ip, mess: mess)
+        //mb?.send(m: mess)
         
     }
     
     func broadcast ( mess : message ) {
         
         hwb?.broadcast(mess: mess)
-        mb?.broacast(m: mess)
+        //mb?.broacast(m: mess)
         
     }
     

@@ -39,23 +39,126 @@ class HWnetworkAdapter {
     
     //throw and receive stuff over realnet
     lazy var netInfo = getIFAddresses()     //get my host name
+    lazy var concurrentQueue = DispatchQueue(label: "com.queue.broadcastUDPtoLocalNetwork", attributes: .concurrent)
+    
     let broadcastPort : Int32 = 8883;
     
-    
-    
-    func send (sender : String, to : String, ip : String , mess : message) {
+    init() {
         
-        //mb?.send(m: mess)
+        listenUDPtrafficOnLocalNetwork()
         
     }
     
+    func rawSend (ip : String ,sdata : Data ){
+        
+        concurrentQueue.async {
+            
+            let lip = "192.168.11.70"
+            let client = UDPClient(address: lip, port: self.broadcastPort )
+            
+            client.send(data: sdata)    //has a 6 char header now that helps parsing on the other side
+            
+            let client2 = UDPClient(address: ip, port: self.broadcastPort )
+            client2.send(data: sdata)    //has a 6 char header now that helps parsing on the other side
+            
+            //client.send(string: "tissi")
+            let hir = "SEND raw UDP to \(lip) : \(self.broadcastPort)"
+            
+            self.debuMess(hir)
+            //print (elmes.body)
+            
+        }
+        
+        
+    }
     
+    func send (sender : String, to : String, ip : String , mess : message) {
+        
+        //mb?.broacast(m: mess)
+        
+        
+        guard let sdata = self.convertToTypedOutgoingUDP(mess: mess) else {
+            
+            return
+            
+        }
+        
+        concurrentQueue.async {
+            
+            /*let myIp = getIFAddresses()
+            
+            //we might be offline
+            if myIp == nil { return }
+            
+            //multicast to local network
+            
+            let ippa = myIp[0].ip.components(separatedBy: ".")*/
+            
+            //let multicast = ippa[0]+"."+ippa[1]+"."+ippa[2]+".255"
+            //let port : Int32 = 8883
+            let lip = "192.168.11.70"
+            
+            
+            //multicast to local network
+            let client = UDPClient(address: lip, port: self.broadcastPort )
+            
+            client.send(data: sdata)    //has a 6 char header now that helps parsing on the other side
+            
+            let client2 = UDPClient(address: ip, port: self.broadcastPort )
+            client2.send(data: sdata)    //has a 6 char header now that helps parsing on the other side
+            
+            //client.send(string: "tissi")
+            let hir = "SEND UDP "+mess.type.rawValue+" to \(lip) : \(self.broadcastPort)"
+            print(hir)
+            self.debuMess(hir)
+            //print (elmes.body)
+            
+        }
+        
+        
+    }
+    
+    func debuMess ( _ m : String ) {
+        
+        concurrentQueue.async {
+            
+            
+            let myIp = getIFAddresses()
+            
+            //we might be offline
+            if myIp == nil { return }
+            
+            //multicast to local network
+            
+            let ippa = myIp[0].ip.components(separatedBy: ".")
+            
+            let multicast = ippa[0]+"."+ippa[1]+"."+ippa[2]+".255"
+            
+            
+            let lip = "192.168.11.70"
+            
+            //multicast to local network
+            let client = UDPClient(address: lip, port: 8884 )
+            client.send(string: "#### "+m+" ####")
+            
+            
+        }
+        
+        
+        
+    }
     
     func broadcast ( mess : message ) {
         
         //mb?.broacast(m: mess)
         let concurrentQueue = DispatchQueue(label: "com.queue.broadcastUDPtoLocalNetwork", attributes: .concurrent)
         let ip = "127.0.0.1" //mess.target
+        
+        guard let sdata = self.convertToTypedOutgoingUDP(mess: mess) else {
+            
+            return
+            
+        }
         
         concurrentQueue.async {
             
@@ -69,22 +172,18 @@ class HWnetworkAdapter {
             let ippa = myIp[0].ip.components(separatedBy: ".")
             
             let multicast = ippa[0]+"."+ippa[1]+"."+ippa[2]+".255"
-            let port : Int32 = 8883
+            //let port : Int32 = 8883
             
             
             
             //multicast to local network
-            let client = UDPClient(address: multicast, port: port)
+            let client = UDPClient(address: multicast, port: self.broadcastPort )
             
-            guard let sdata = self.convertToTypedOutgoingUDP(mess: mess) else {
-                
-                return
-                
-            }
-            //client.enableBroadcast()
+            
+            client.enableBroadcast()
             client.send(data: sdata)    //has a 6 char header now that helps parsing on the other side
             
-            print ("broadcastRingMessageUDPtoPeer   sent UDP to \(ip) : \(port)")
+            print ("BROADCAST UDP to \(multicast) : \(self.broadcastPort)")
             //print (elmes.body)
             
         }
@@ -92,7 +191,7 @@ class HWnetworkAdapter {
     }
     
     
-    func listenUDPtrafficOnLocalNetwork(ip:String){
+    func listenUDPtrafficOnLocalNetwork(){
         
         let ServerconcurrentQueue = DispatchQueue(label: "com.queue.Concurrent")
         
@@ -121,7 +220,7 @@ class HWnetworkAdapter {
                     
                     
                     if let d=data{
-                        print("receive")
+                        print("receive form " + remoteip)
                         
                         //convert bytes into uint8 array
                         let ca = Data(data!)
@@ -133,31 +232,13 @@ class HWnetworkAdapter {
                         //pass it to observer thats in the user objectto
                         HWnetworkAdapterUDPReceivedObserver.update(m);
                         
-                        return;
                         
-                        if let str=String(bytes: d, encoding: String.Encoding.utf8){
-                            
-                            //just send th string as NSnotification so we can get back to the UDP listener loop as soon as possible
-                            let data = [str,remoteip]
-                            NotificationCenter.default.post(name: Notification.Name(rawValue: "incomingUDPmessage"), object: nil, userInfo: [ "data" : data] )
-                            
-                            
-                            //let index = str.index(str.startIndex, offsetBy: 4)
-                            /*let startIndex = str.index(str.startIndex, offsetBy: 0)
-                             let endIndex = str.index(str.startIndex, offsetBy: 4)
-                             
-                             if str[startIndex...endIndex] == "RING" {
-                             
-                             //add this
-                             self.mySyncRing.actOnRingMessageUDP(message: str)
-                             return
-                             }*/
-                            
-                            
-                            
-                        }
                     }   //if this is from outside IP address
                     
+                    
+                } else {
+                    
+                    print ("onw");
                     
                 }
                 
@@ -185,27 +266,27 @@ class HWnetworkAdapter {
         
         switch header {
         
-        case messageType.ADVERTISE.rawValue :
+        case UDPMessageTypeAdaptor.ADVERTISE.rawValue :
             mType = messageType.ADVERTISE
             mData = dat.subdata(in: 6..<dat.count  )
             
-        case messageType.HANDSHAKE_SEND1.rawValue :
+        case UDPMessageTypeAdaptor.HANDSHAKE_SEND1.rawValue :
             mType = messageType.HANDSHAKE_SEND1
             mData = dat.subdata(in: 6..<dat.count  )
             
-        case messageType.HANDSHAKE_REPLY1.rawValue :
+        case UDPMessageTypeAdaptor.HANDSHAKE_REPLY1.rawValue :
             mType = messageType.HANDSHAKE_REPLY1
             mData = dat.subdata(in: 6..<dat.count  )
             
-        case messageType.HANDSHAKE_SEND2.rawValue :
+        case UDPMessageTypeAdaptor.HANDSHAKE_SEND2.rawValue :
             mType = messageType.HANDSHAKE_SEND2
             mData = dat.subdata(in: 6..<dat.count  )
             
-        case messageType.HANDSHAKE_REPLY2.rawValue :
+        case UDPMessageTypeAdaptor.HANDSHAKE_REPLY2.rawValue :
             mType = messageType.HANDSHAKE_REPLY2
             mData = dat.subdata(in: 6..<dat.count  )
             
-        case messageType.LOGOUT.rawValue :
+        case UDPMessageTypeAdaptor.LOGOUT.rawValue :
             mType = messageType.LOGOUT
             mData = dat.subdata(in: 6..<dat.count  )
             

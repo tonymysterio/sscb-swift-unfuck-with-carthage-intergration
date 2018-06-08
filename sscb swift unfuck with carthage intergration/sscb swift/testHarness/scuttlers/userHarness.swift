@@ -8,6 +8,8 @@
 
 import Foundation
 import Sodium
+import Servus
+
 
 
 class userFrame {
@@ -16,6 +18,8 @@ class userFrame {
     lazy var _ssbKz = ssbKeys()
     
     weak var mNet : networkAdapter?
+    //let serialQueue = DispatchQueue(label: "messageAppendQueue")
+    
     //HWnetworkAdapterUDPReceivedObserver
     
     
@@ -29,6 +33,9 @@ class userFrame {
         
         self.data = userx;
         self.mNet = mb;
+        
+        
+        
         
         HWnetworkAdapterUDPReceivedObserver.subscribe{ udpMessage in
             
@@ -44,10 +51,21 @@ class userFrame {
             
             //
             guard let mess = self.mNet?.hwb?.convertIncomingToTypedMessage(delType: deliveryType.DIRECT, dat: udpMessage.data, ip: senderIp) else {
+                
+                
+                self.mNet?.debuMess("fucked string from "+senderName+"@"+senderIp);
                 return
             }
             //shoehorn into a message
-            self.processMessage(m: mess)
+            
+            //self.serialQueue.sync {
+                
+               self.processMessage(m: mess)
+                
+            //}
+            
+            
+            
             
         }
         
@@ -69,7 +87,9 @@ class userFrame {
             //hostname
             
             //search for peerDataRequester for this peer
-            self.advertise()
+            //self.serialQueue.sync {
+                self.advertiseToMeshPeer(peer: peer)
+            //}
             /*DispatchQueue.global(qos: .utility).async {
                 
                 
@@ -79,6 +99,11 @@ class userFrame {
         }
         
         peerExplorerDidLosePeerObserver.subscribe() { peer in
+            
+            //self.serialQueue.sync {
+                self.flushFriends()
+            //}
+            //self.advertiseToMeshPeer(peer: peer)
             
             //var id = peer.identifier    //host cannot be seen now
             //DispatchQueue.main.async {
@@ -90,6 +115,16 @@ class userFrame {
             
         }
         
+        appTerminate.subscribe() { tit in
+            
+            //send a goodbye messages
+            if tit {
+            self._teardown();
+            } else {
+                self._wakeup();
+                
+            }
+        }
     
     }
     
@@ -124,6 +159,71 @@ class userFrame {
         
     }
     
+    func findFriendByIp ( ip : String) -> friend? {
+        
+        guard let fr = data?.friends else { return nil }
+        for x in fr {
+            
+            if (x?.ip == ip) { return x; }
+            
+        }
+        
+        return nil
+        
+    }
+    
+    
+    func pollFriends () {
+    
+        guard let fr = data?.friends else { return }
+    
+        
+    
+    
+    
+        for x in fr {
+    
+            //if let encryptedMessage = x?.connections?.channel?.say(message: _message) {
+            
+                if let na = x?.name {
+                    
+                    let blabla = "HULLO to "+na+" from "+(self.data?.name)!+"@"+(self.data?.ip)!
+                    
+                    guard let _message: Data = blabla.data(using: .utf8) else { return }
+                    
+                    //mNet?.send(sender: (self.data?.name)!, to: x.name, ip: x.ip, mess: message(delType: deliveryType.DIRECT, fromIp :(self.data?.ip)!,  sender: self.data!.name, target: x.name, type: messageType.SAY, text: x.name, data: encryptedMessage))
+                    
+                    mNet?.send(sender: (self.data?.name)!, to: na, ip: na, mess: message(delType: deliveryType.DIRECT, fromIp :(self.data?.ip)!,  sender: self.data!.name, target: na, type: messageType.SAY, text: na, data: _message))
+                }
+                
+            //}
+    
+    
+        }
+    
+    
+    
+    }
+    
+    func pollSecretFriends () {
+        
+        guard let fr = data?.friends else { return }
+        
+        for x in fr {
+            
+            let blabla = "SECRET banter"//"HULLO to "+na+" from "+(self.data?.name)!+"@"+(self.data?.ip)!
+            guard let _message: Data = blabla.data(using: .utf8) else { return }
+            
+            if let encryptedMessage = x?.connections?.channel?.say(message: _message) {
+                
+                self.mNet?.rawSend(ip: (x?.ip)!, sdata: encryptedMessage )
+                
+            }
+        }
+        
+    }
+    
+    
     func updateFriend ( f: friend ) -> Bool {
         
         guard let fr = data?.friends else { return false }
@@ -139,6 +239,19 @@ class userFrame {
         }
         
         return false;
+        
+    }
+    
+    func flushFriends() {
+        
+        if let x = data?.friends {
+            
+            if x.isEmpty { return }
+            data?.friends = [friend?]()
+            mNet?.debuMess("FLUSHINg friends")
+            
+            return }
+        
         
     }
     
@@ -163,7 +276,11 @@ class userFrame {
     
     func handshakeFriend ( name : String , ip : String ) {
         
-        guard var friendo = findFriend(name: name) else { return }
+        //guard var friendo = findFriend(name: name) else {
+        guard var friendo = findFriendByIp(ip: ip) else {
+            return
+            
+        }
         let hs = secretHandshake(name: friendo.name, type: handshakeType.CALL, myk: nil )
         
         let conn = ssbConnection(name: name, ip : ip ,inbound: false, handshaked: false, terminated: false, handshake: hs, channel : nil )
@@ -180,6 +297,10 @@ class userFrame {
             
             //not a null, lets handshake
             mNet?.send(sender: (self.data?.name)!, to: friendo.name, ip: friendo.ip, mess: message(delType: deliveryType.DIRECT, fromIp : self.data!.ip, sender: self.data!.name, target: friendo.name, type: messageType.HANDSHAKE_SEND1, text: "handshaka 1", data: seMes.data))
+            
+                mNet?.debuMess("handshakeFriend "+friendo.name+"@"+friendo.ip);
+            
+            return
             
         }
         
@@ -200,7 +321,7 @@ class userFrame {
     func completeHandshake ( f : friend ) {
         
         if let name = data?.name {
-            print ( name + " COMPLETED handshake with " + f.name+"@"+f.ip )
+            mNet?.debuMess ( name + " COMPLETED handshake with " + f.name+"@"+f.ip )
         }
         
         
@@ -227,15 +348,61 @@ class userFrame {
         
     }
     
+    func advertiseToMeshPeer (peer : Peer ) {
+        
+        if peer.hostname == nil { return }
+        //got a mesh guy showing up
+        //advertise
+        /*if let friendo = findFriend(name: peer.hostname!) {
+            
+            return; //if friendo.connections?.channel
+        }
+        
+        let f = friend(name: peer.hostname!, ip: peer.hostname!, publicKey: nil, ephKey: nil, connections: nil)
+        addFriend(friend: f)
+ 
+        */
+        
+        //serialQueue.sync {
+        let m = message(delType: deliveryType.MULTICAST, fromIp: (self.data?.name)!, sender: (self.data?.name)!, target: "", type: messageType.ADVERTISE, text: (self.data?.ip)!, data: self.data?.mySsbKeys?.publicKey)    //send pub key to everyboody
+        
+        mNet?.debuMess("advertising to meshnet peer "+peer.hostname!+" directly")
+        
+        mNet?.send(sender:m.fromIp, to: peer.hostname!, ip: peer.hostname!, mess: m)
+        //}
+    }
+    
     func advertise () {
         
         //THIS is going to so bite me on the back
-        let m = message(delType: deliveryType.MULTICAST, fromIp: (self.data?.name)!, sender: (self.data?.name)!, target: "", type: messageType.ADVERTISE, text: (self.data?.ip)!, data: self.data?.mySsbKeys?.publicKey)    //send pub key to everyboody
+        //serialQueue.sync {
+            
+            let m = message(delType: deliveryType.MULTICAST, fromIp: (self.data?.name)!, sender: (self.data?.name)!, target: "", type: messageType.ADVERTISE, text: (self.data?.ip)!, data: self.data?.mySsbKeys?.publicKey)    //send pub key to everyboody
         
-        print ("advertising with broadcast")
+            print ("advertising with broadcast")
+        
+            mNet?.broadcast(mess: m)
+            
+        //}
+        
+    }
+    
+    func _teardown() {
+        
+        //THIS is going to so bite me on the back
+        let m = message(delType: deliveryType.MULTICAST, fromIp: (self.data?.name)!, sender: (self.data?.name)!, target: "", type: messageType.LOGOUT, text: (self.data?.ip)!, data: self.data?.mySsbKeys?.publicKey)    //send pub key to everyboody
+        
+        mNet?.debuMess((self.data?.name)!+"teardown")
+        print ("teardown")
         
         mNet?.broadcast(mess: m)
         
+    }
+    
+    func _wakeup () {
+        
+        mNet?.debuMess((self.data?.name)!+"wakeup")
+        print ("wakeup")
     }
     
     //nasty stuff follows
@@ -243,23 +410,39 @@ class userFrame {
     func processMessage ( m: message ) {
         
         if let n = self.data?.name {
-            
-            print (n + " received " + m.type.rawValue + " from " + m.sender )
+            let d = (n + " received " + m.type.rawValue + " from " + m.sender )
+            print(d);
+            mNet?.debuMess(d)
         }
+        
+        
         
         switch m.type {
             
         case messageType.HANDSHAKE_SEND1 :
             
-            var friendo = findFriend(name: m.sender)
+            var friendo = findFriendByIp(ip: m.fromIp)
+            
+            
             if friendo == nil {
                 
                 //return
                 //add a friend and we dont know his key yet
-                print ("added a new friend whos trying to handshake "+m.sender)
+                mNet?.debuMess ("added a new friend whos trying to handshake "+m.sender)
                 friendo = addFriend(friend: friend(name: m.sender, ip: m.text!, publicKey: m.data, ephKey: nil, connections: nil))
                 
             }
+            
+            if  friendo?.connections != nil {
+                
+                if let h = friendo!.connections?.handshake {
+                    if h.round != 1 { return }
+                }
+                
+            }
+            
+            //I send a handshake but he came in first
+            //override
             
             let hs = secretHandshake(name: friendo!.name, type: handshakeType.RESPONSE, myk: nil )
             let conn = ssbConnection(name: m.sender, ip: m.fromIp, inbound: true, handshaked: false, terminated: false, handshake: hs , channel : nil )
@@ -271,10 +454,18 @@ class userFrame {
                 
                 mNet?.send(sender: (self.data?.name)!, to: friendo!.name, ip: friendo!.ip, mess: message(delType: deliveryType.DIRECT, fromIp: (self.data?.ip)!, sender: self.data!.name, target: m.sender, type: messageType.HANDSHAKE_REPLY1, text: "shake reply 1", data: seMes.data))
                 
+            } else {
+                
+                mNet?.debuMess("messageType.HANDSHAKE_SEND1 trouble at sea")
+                
             }
             
         case messageType.HANDSHAKE_REPLY1 :
-            guard var friendo = findFriend(name: m.sender) else {
+            
+            
+            
+            
+            guard var friendo = findFriendByIp(ip: m.fromIp) else {
                 
                 return
                 
@@ -299,7 +490,7 @@ class userFrame {
             //in real life this calcs more keys
             //remember to update frendo
             
-            guard var friendo = findFriend(name: m.sender) else { return }
+            guard var friendo = findFriendByIp(ip: m.fromIp) else { return }
             
             if let seMes = friendo.connections?.handshake?.receiveHandshakeSEND(data: m.data as! Data) {
                 
@@ -321,7 +512,7 @@ class userFrame {
             
         case messageType.HANDSHAKE_REPLY2 :
             
-            guard var friendo = findFriend(name: m.sender) else {
+            guard var friendo =  findFriendByIp(ip: m.fromIp) else {
                 
                 return
                 
@@ -354,7 +545,8 @@ class userFrame {
         case messageType.SAY :
             
             //got a message
-            guard var friendo = findFriend(name: m.sender) else {
+            //guard var friendo = findFriend(name: m.sender) else {
+            guard var friendo = findFriendByIp(ip: m.fromIp) else {
                 
                 return
                 
@@ -368,14 +560,27 @@ class userFrame {
                 let fup = String(decoding: mdat, as: UTF8.self)
                 
                 let m = "encrypted message from "+friendo.name+"@"+friendo.ip+" : "+fup
-                print(m)
+                mNet?.debuMess(m)
+                //print(m)
+            
+            } else {
+                
+                //unencrypted shit maybe
+                let m = "uencrypted message from "+friendo.name+"@"+friendo.ip+" : " + String(decoding: m.data!, as: UTF8.self)
+                mNet?.debuMess(m)
+                
             }
             
             
         case messageType.ADVERTISE :
             
             //somebody is advertizing
-            if let friendo = findFriend(name: m.sender) {
+            
+            if let friendo = findFriendByIp( ip: m.fromIp) {
+            
+            //if let friendo = findFriend(name: m.sender) {
+                
+                
                 
                 if let fc = friendo.connections {
                     
@@ -391,8 +596,10 @@ class userFrame {
             
             //TODO verify the passed pub key
             
+            let name = String(decoding: m.data!, as: UTF8.self)
+            
             //add this exciting new acquintance immediately and start handshaking, baby
-            if let friendo = addFriend(friend: friend(name: m.sender, ip: m.text!, publicKey: m.data, ephKey: nil, connections: nil)) {
+            if let friendo = addFriend(friend: friend(name: name , ip: m.fromIp, publicKey: m.data, ephKey: nil, connections: nil)) {
                 
                 handshakeFriend(name: friendo.name , ip : friendo.ip )
                 
@@ -400,6 +607,12 @@ class userFrame {
             
             
             return;
+            
+        case messageType.LOGOUT :
+            
+            
+            self.flushFriends()
+            
             
         default:
             return

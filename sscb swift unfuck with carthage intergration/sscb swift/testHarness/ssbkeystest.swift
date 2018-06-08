@@ -10,6 +10,7 @@ import Foundation
 import Sodium
 
 
+
 extension String {
     
     func fromBase64() -> String? {
@@ -45,8 +46,11 @@ class SsbKeysTest {
     
     func test() {
         
+        //let mm = host
+        //let currentHost = mm.current().localizedName ?? ""
         
-        uunot.data.insert(userFrame(name: "Jerry", ip: "home" ,mb: _njetwork), at: 0)
+        
+        uunot.data.insert(userFrame(name: "ota", ip: "home" ,mb: _njetwork), at: 0)
         //uunot.data.insert(userFrame(name: "Mr Kijewski", ip: "Alcohole Galaxy",mb: _njetwork), at: 1)
         //uunot.data.insert(userFrame(name: "Wojciec", ip: "rainbow gathering",mb: _njetwork  ), at: 2)
         
@@ -83,10 +87,10 @@ class SsbKeysTest {
         //uunot.data[1]?.handshakeFriend(name: (uunot.data[2]?.data?.name)!)
         
         //Swift >=3 selector syntax
-        var timer = Timer.scheduledTimer(timeInterval: 0.4, target: self, selector: #selector(self.update), userInfo: nil, repeats: true)
+        var timer = Timer.scheduledTimer(timeInterval: 10.4, target: self, selector: #selector(self.update), userInfo: nil, repeats: true)
         
-        
-        
+        uunot.data[0]?._teardown(); //just to reset ota
+        uunot.data[0]?.advertise();
         return;
         
         uunot.data[1]?.advertise()
@@ -161,7 +165,10 @@ class SsbKeysTest {
     // must be internal or public.
     @objc func update() {
         // Something cool
-        uunot.data[1]?.advertise()
+        uunot.data[0]?.advertise()
+        
+        //uunot.data[0]?.pollFriends()
+        uunot.data[0]?.pollSecretFriends()
         
     }
     
