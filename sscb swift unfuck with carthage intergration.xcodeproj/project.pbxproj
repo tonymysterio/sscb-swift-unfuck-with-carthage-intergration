@@ -18,6 +18,15 @@
 		260CA93220C4F3CF000D09D4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260CA92920C4F3CF000D09D4 /* ViewController.swift */; };
 		260CA93420C4F4AC000D09D4 /* Sodium.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 260CA93320C4F4AB000D09D4 /* Sodium.framework */; };
 		260CA93520C4F4AC000D09D4 /* Sodium.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 260CA93320C4F4AB000D09D4 /* Sodium.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		264420B420C9153E00060B17 /* HWnetworkAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264420B320C9153E00060B17 /* HWnetworkAdapter.swift */; };
+		264420B720C916A400060B17 /* NetInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264420B620C916A400060B17 /* NetInfo.swift */; };
+		264420B920C9190000060B17 /* SwiftSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 264420B820C918FF00060B17 /* SwiftSocket.framework */; };
+		264420BA20C9190000060B17 /* SwiftSocket.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 264420B820C918FF00060B17 /* SwiftSocket.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		264420BC20C920F000060B17 /* Interstellar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 264420BB20C920EF00060B17 /* Interstellar.framework */; };
+		264420BD20C920F000060B17 /* Interstellar.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 264420BB20C920EF00060B17 /* Interstellar.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		264420BF20C9238500060B17 /* servus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264420BE20C9238500060B17 /* servus.swift */; };
+		264420C120C9265300060B17 /* Servus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 264420C020C9265300060B17 /* Servus.framework */; };
+		264420C220C9265300060B17 /* Servus.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 264420C020C9265300060B17 /* Servus.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		267D323120C6126F0025E382 /* sercretHandshake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267D323020C6126F0025E382 /* sercretHandshake.swift */; };
 		267D323420C653440025E382 /* messageBus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267D323320C653440025E382 /* messageBus.swift */; };
 		267D323620C7885E0025E382 /* ssb-channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267D323520C7885E0025E382 /* ssb-channel.swift */; };
@@ -35,7 +44,10 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				264420C220C9265300060B17 /* Servus.framework in Embed Frameworks */,
 				260CA93520C4F4AC000D09D4 /* Sodium.framework in Embed Frameworks */,
+				264420BD20C920F000060B17 /* Interstellar.framework in Embed Frameworks */,
+				264420BA20C9190000060B17 /* SwiftSocket.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -55,6 +67,12 @@
 		260CA92820C4F3CF000D09D4 /* ssb-ref.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ssb-ref.swift"; sourceTree = "<group>"; };
 		260CA92920C4F3CF000D09D4 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		260CA93320C4F4AB000D09D4 /* Sodium.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sodium.framework; path = "sscb swift unfuck with carthage intergration/Carthage/Build/iOS/Sodium.framework"; sourceTree = "<group>"; };
+		264420B320C9153E00060B17 /* HWnetworkAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HWnetworkAdapter.swift; sourceTree = "<group>"; };
+		264420B620C916A400060B17 /* NetInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetInfo.swift; sourceTree = "<group>"; };
+		264420B820C918FF00060B17 /* SwiftSocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftSocket.framework; path = "sscb swift unfuck with carthage intergration/Carthage/Build/iOS/SwiftSocket.framework"; sourceTree = "<group>"; };
+		264420BB20C920EF00060B17 /* Interstellar.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Interstellar.framework; path = "sscb swift unfuck with carthage intergration/Carthage/Build/iOS/Interstellar.framework"; sourceTree = "<group>"; };
+		264420BE20C9238500060B17 /* servus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = servus.swift; sourceTree = "<group>"; };
+		264420C020C9265300060B17 /* Servus.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Servus.framework; path = "sscb swift unfuck with carthage intergration/Carthage/Build/iOS/Servus.framework"; sourceTree = "<group>"; };
 		267D323020C6126F0025E382 /* sercretHandshake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sercretHandshake.swift; sourceTree = "<group>"; };
 		267D323320C653440025E382 /* messageBus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = messageBus.swift; sourceTree = "<group>"; };
 		267D323520C7885E0025E382 /* ssb-channel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ssb-channel.swift"; sourceTree = "<group>"; };
@@ -70,7 +88,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				264420C120C9265300060B17 /* Servus.framework in Frameworks */,
 				260CA93420C4F4AC000D09D4 /* Sodium.framework in Frameworks */,
+				264420BC20C920F000060B17 /* Interstellar.framework in Frameworks */,
+				264420B920C9190000060B17 /* SwiftSocket.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,6 +101,9 @@
 		260CA8FD20C4F3B8000D09D4 = {
 			isa = PBXGroup;
 			children = (
+				264420C020C9265300060B17 /* Servus.framework */,
+				264420BB20C920EF00060B17 /* Interstellar.framework */,
+				264420B820C918FF00060B17 /* SwiftSocket.framework */,
 				260CA93320C4F4AB000D09D4 /* Sodium.framework */,
 				260CA90820C4F3B8000D09D4 /* sscb swift unfuck with carthage intergration */,
 				260CA90720C4F3B8000D09D4 /* Products */,
@@ -146,6 +170,15 @@
 			path = "ssb-ref";
 			sourceTree = "<group>";
 		};
+		264420B520C9168F00060B17 /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				264420B620C916A400060B17 /* NetInfo.swift */,
+				264420BE20C9238500060B17 /* servus.swift */,
+			);
+			path = utils;
+			sourceTree = "<group>";
+		};
 		267D323220C653300025E382 /* messageBus */ = {
 			isa = PBXGroup;
 			children = (
@@ -157,7 +190,9 @@
 		267D323720C7A73D0025E382 /* networkAdapter */ = {
 			isa = PBXGroup;
 			children = (
+				264420B520C9168F00060B17 /* utils */,
 				267D323820C7A7540025E382 /* networkAdapter.swift */,
+				264420B320C9153E00060B17 /* HWnetworkAdapter.swift */,
 			);
 			path = networkAdapter;
 			sourceTree = "<group>";
@@ -264,11 +299,14 @@
 				26CE343320C51B61005FC3D5 /* private-box.swift in Sources */,
 				260CA92A20C4F3CF000D09D4 /* AppDelegate.swift in Sources */,
 				267D323F20C7B7100025E382 /* processUserMessages.swift in Sources */,
+				264420B720C916A400060B17 /* NetInfo.swift in Sources */,
 				267D323420C653440025E382 /* messageBus.swift in Sources */,
 				260CA92F20C4F3CF000D09D4 /* ssb-keys.swift in Sources */,
 				26CE343620C60DF9005FC3D5 /* userHarness.swift in Sources */,
+				264420B420C9153E00060B17 /* HWnetworkAdapter.swift in Sources */,
 				260CA93220C4F3CF000D09D4 /* ViewController.swift in Sources */,
 				260CA93020C4F3CF000D09D4 /* ssbkeystest.swift in Sources */,
+				264420BF20C9238500060B17 /* servus.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -417,6 +455,9 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/sscb\\ swift\\ unfuck\\ with\\ carthage\\ intergration/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/sscb\\ swift\\ unfuck\\ with\\ carthage\\ intergration/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/sscb\\ swift\\ unfuck\\ with\\ carthage\\ intergration/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/sscb\\ swift\\ unfuck\\ with\\ carthage\\ intergration/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = "sscb swift unfuck with carthage intergration/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
@@ -439,6 +480,9 @@
 				DEVELOPMENT_TEAM = 86ZK99Q6D8;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
+					"$(PROJECT_DIR)/sscb\\ swift\\ unfuck\\ with\\ carthage\\ intergration/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/sscb\\ swift\\ unfuck\\ with\\ carthage\\ intergration/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/sscb\\ swift\\ unfuck\\ with\\ carthage\\ intergration/Carthage/Build/iOS",
 					"$(PROJECT_DIR)/sscb\\ swift\\ unfuck\\ with\\ carthage\\ intergration/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = "sscb swift unfuck with carthage intergration/Info.plist";

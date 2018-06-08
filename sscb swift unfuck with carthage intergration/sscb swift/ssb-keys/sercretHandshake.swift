@@ -9,7 +9,12 @@
 import Foundation
 import Sodium
 
-enum handshakeType { case CALL ; case RESPONSE }
+enum handshakeType {
+    
+    case CALL
+    case RESPONSE
+    
+}
 enum handshakeReplyType : String {
     
     case SEND1 = "send1"

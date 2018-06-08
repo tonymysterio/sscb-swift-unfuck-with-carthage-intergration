@@ -19,11 +19,12 @@ struct rawNetworkMessage {
 class networkAdapter {
     
     var mb : messageBus?
+    var hwb : HWnetworkAdapter?
     
     init (_mb : messageBus) {
         
         mb = _mb
-        
+        hwb = HWnetworkAdapter()
     }
     
     func read (name: String) -> messageBox? {
@@ -40,7 +41,20 @@ class networkAdapter {
     
     func broadcast ( mess : message ) {
         
+        hwb?.broadcast(mess: mess)
         mb?.broacast(m: mess)
         
     }
+    
+    //hard net
+    func receiveUDP ( m : UDPMessage ) -> message? {
+        
+        //silly to parse this here
+        
+        //parse this to readablos
+        let w = message(delType: deliveryType.DIRECT, fromIp: m.ip, sender: m.ip, target: "", type: messageType.ADVERTISE, text: "", data: m.data)
+        return w;
+        
+    }
+    
 }

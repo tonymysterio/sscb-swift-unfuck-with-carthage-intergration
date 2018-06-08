@@ -1,1 +1,4 @@
 github "jedisct1/swift-sodium" ~> 0.6
+github "swiftsocket/SwiftSocket"
+github "JensRavens/Interstellar"
+github "airalex/Servus"

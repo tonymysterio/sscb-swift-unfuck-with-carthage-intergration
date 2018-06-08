@@ -39,14 +39,16 @@ class SsbKeysTest {
     let mssbKeys = ssbKeys();
     
     let _njetwork = networkAdapter(_mb: messageBus())
+    let _meshnet = ServusMeshnetProvider()
     
+    var uunot = scuttlers(data:[])
     
     func test() {
         
-        var uunot = scuttlers(data:[])
+        
         uunot.data.insert(userFrame(name: "Jerry", ip: "home" ,mb: _njetwork), at: 0)
-        uunot.data.insert(userFrame(name: "Mr Kijewski", ip: "Alcohole Galaxy",mb: _njetwork), at: 1)
-        uunot.data.insert(userFrame(name: "Wojciec", ip: "rainbow gathering",mb: _njetwork  ), at: 2)
+        //uunot.data.insert(userFrame(name: "Mr Kijewski", ip: "Alcohole Galaxy",mb: _njetwork), at: 1)
+        //uunot.data.insert(userFrame(name: "Wojciec", ip: "rainbow gathering",mb: _njetwork  ), at: 2)
         
         //give em keys
         for u in uunot.data {
@@ -75,11 +77,17 @@ class SsbKeysTest {
         
         
         
-        
         let tum = 1;
             //user(name: "jerry", ip: "0", mySsbKeys: nil, knownUsers: nil), at: 0)
         
         //uunot.data[1]?.handshakeFriend(name: (uunot.data[2]?.data?.name)!)
+        
+        //Swift >=3 selector syntax
+        var timer = Timer.scheduledTimer(timeInterval: 0.4, target: self, selector: #selector(self.update), userInfo: nil, repeats: true)
+        
+        
+        
+        return;
         
         uunot.data[1]?.advertise()
         
@@ -149,4 +157,12 @@ class SsbKeysTest {
         
         let didl = 1;
     }
+    
+    // must be internal or public.
+    @objc func update() {
+        // Something cool
+        uunot.data[1]?.advertise()
+        
+    }
+    
 }

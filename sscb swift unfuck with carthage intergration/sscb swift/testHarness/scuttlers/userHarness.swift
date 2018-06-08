@@ -16,6 +16,8 @@ class userFrame {
     lazy var _ssbKz = ssbKeys()
     
     weak var mNet : networkAdapter?
+    //HWnetworkAdapterUDPReceivedObserver
+    
     
     init( name : String, ip : String , mb : networkAdapter) {
         
@@ -27,6 +29,67 @@ class userFrame {
         
         self.data = userx;
         self.mNet = mb;
+        
+        HWnetworkAdapterUDPReceivedObserver.subscribe{ udpMessage in
+            
+            /*if let mud = mNet.receiveUDP( m : UDPMessage ) {
+                
+                processMessage(m: m)    // just process this
+            } */
+            //var m = UDPMessage(data: ca, ip: remoteip, port: self.broadcastPort)
+            
+            //stuff that comes for built in test
+            let senderName = udpMessage.ip;
+            let senderIp = udpMessage.ip;
+            
+            //
+            guard let mess = self.mNet?.hwb?.convertIncomingToTypedMessage(delType: deliveryType.DIRECT, dat: udpMessage.data, ip: senderIp) else {
+                return
+            }
+            //shoehorn into a message
+            self.processMessage(m: mess)
+            
+        }
+        
+        //servus stuff
+        peerExplorerDidSpotPeerObserver.subscribe { peer in
+            
+            //this might alert the users UI
+            //maybe no need
+            
+        }
+        
+        
+        peerExplorerDidDeterminePeerObserver.subscribe { peer in
+            
+            //inform user. might end up into a big list
+            //some of these peers might not be valid data providers
+            
+            //identifier
+            //hostname
+            
+            //search for peerDataRequester for this peer
+            self.advertise()
+            /*DispatchQueue.global(qos: .utility).async {
+                
+                
+                self.pollNewPeerForData(peer: peer)
+                
+            }*/
+        }
+        
+        peerExplorerDidLosePeerObserver.subscribe() { peer in
+            
+            //var id = peer.identifier    //host cannot be seen now
+            //DispatchQueue.main.async {
+            /*DispatchQueue.global(qos: .utility).async {
+                
+                
+                self.peerExplorerDidLosePeer(peer: peer)
+            }*/
+            
+        }
+        
     
     }
     
@@ -168,6 +231,8 @@ class userFrame {
         
         //THIS is going to so bite me on the back
         let m = message(delType: deliveryType.MULTICAST, fromIp: (self.data?.name)!, sender: (self.data?.name)!, target: "", type: messageType.ADVERTISE, text: (self.data?.ip)!, data: self.data?.mySsbKeys?.publicKey)    //send pub key to everyboody
+        
+        print ("advertising with broadcast")
         
         mNet?.broadcast(mess: m)
         
