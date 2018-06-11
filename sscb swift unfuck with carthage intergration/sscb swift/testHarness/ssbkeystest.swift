@@ -51,8 +51,8 @@ class SsbKeysTest {
         
         
         uunot.data.insert(userFrame(name: "ohta", ip: "home" ,mb: _njetwork), at: 0)
-        //uunot.data.insert(userFrame(name: "Mr Kijewski", ip: "Alcohole Galaxy",mb: _njetwork), at: 1)
-        //uunot.data.insert(userFrame(name: "Wojciec", ip: "rainbow gathering",mb: _njetwork  ), at: 2)
+        uunot.data.insert(userFrame(name: "Mr Kijewski", ip: "Alcohole Galaxy",mb: _njetwork), at: 1)
+        uunot.data.insert(userFrame(name: "Wojciec", ip: "rainbow gathering",mb: _njetwork  ), at: 2)
         
         //give em keys
         for u in uunot.data {
@@ -61,6 +61,45 @@ class SsbKeysTest {
             u?.setMyKeys(keys: keys)
             
         }
+        
+        //bsData
+        let senders = ["a","b","c","d"]
+        var sendco = 0;
+        
+        var sink = overflowableSink(maxItems: 10,maxItemsPerSource: 3)
+        //var mu = 1;
+        
+        var f = 0 ;
+        while (f<5000) {
+            
+            var mu = (sendco + 1) * (sendco + 2);
+            var daa = bsData(mult: mu)
+            let mo = String(daa.count) + " bytes from " + senders[sendco] + " = "+String(mu)
+            print (mo);
+            
+            var hap = sink._push(senders[sendco], daa )
+            if (hap == sinkResponse.DROP) {
+                
+                let sout = sink._pull(_maxBytes: networkSpeed._2g_slow.rawValue)
+                let its = sout?.count
+                var totco = 0;
+                for x in sout! {
+                    totco = totco + x._data.count
+                }
+                
+                let zillo = 1;
+                
+            }
+            
+            sendco = sendco + 1
+            if (sendco == 4) {
+                sendco = 0
+                
+            }
+            f = f + 1;
+            
+        }
+        
         
         //copy public keys
         /*var preuuno : userFrame? = nil

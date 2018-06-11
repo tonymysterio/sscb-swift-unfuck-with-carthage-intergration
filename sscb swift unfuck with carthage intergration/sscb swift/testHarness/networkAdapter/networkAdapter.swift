@@ -20,6 +20,8 @@ class networkAdapter {
     
     var mb : messageBus?
     var hwb : HWnetworkAdapter?
+    var outgoingSink = overflowableSink(maxItems: 10,maxItemsPerSource: 3)
+    var outgoingSinkSending = false;
     
     init (_mb : messageBus) {
         
@@ -45,7 +47,27 @@ class networkAdapter {
     //just send data to ip
     func rawSend (ip : String ,sdata : Data ){
      
-        hwb?.rawSend(ip: ip, sdata: sdata)
+        let r = outgoingSink._push(ip, sdata)
+        if !outgoingSinkSending {
+            
+            if let m = outgoingSink._pull(_maxBytes: networkSpeed._2g_slow.rawValue) {
+                
+                outgoingSinkSending = true;
+                //dangerous approach
+                
+                for f in m {
+                    
+                    hwb?.rawSend(ip: ip, sdata: sdata)
+                    
+                }
+                
+                outgoingSinkSending = false;
+            }
+            
+        }
+        
+        
+        //hwb?.rawSend(ip: ip, sdata: sdata)
     
     }
     
