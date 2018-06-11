@@ -120,10 +120,11 @@ class HWnetworkAdapter {
     
     func debuMess ( _ m : String ) {
         
-        return
+        
             
         concurrentQueue.async {
             
+            return
             
             let myIp = getIFAddresses()
             

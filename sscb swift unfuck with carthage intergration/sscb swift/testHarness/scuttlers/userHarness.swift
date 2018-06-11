@@ -406,7 +406,7 @@ class userFrame {
         mNet?.debuMess((self.data?.name)!+"teardown")
         print ("teardown")
         
-        mNet?.broadcast(mess: m)
+        //mNet?.broadcast(mess: m)
         
     }
     

@@ -27,6 +27,8 @@
 		264420BF20C9238500060B17 /* servus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264420BE20C9238500060B17 /* servus.swift */; };
 		264420C120C9265300060B17 /* Servus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 264420C020C9265300060B17 /* Servus.framework */; };
 		264420C220C9265300060B17 /* Servus.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 264420C020C9265300060B17 /* Servus.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		264EAB8D20CE343D00F2628A /* timeoutable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264EAB8C20CE343D00F2628A /* timeoutable.swift */; };
+		264EAB8F20CE346F00F2628A /* overflowable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264EAB8E20CE346F00F2628A /* overflowable.swift */; };
 		2653EC5620CDF54500A15723 /* ssbConnections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2653EC5520CDF54500A15723 /* ssbConnections.swift */; };
 		267D323120C6126F0025E382 /* sercretHandshake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267D323020C6126F0025E382 /* sercretHandshake.swift */; };
 		267D323420C653440025E382 /* messageBus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267D323320C653440025E382 /* messageBus.swift */; };
@@ -74,6 +76,8 @@
 		264420BB20C920EF00060B17 /* Interstellar.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Interstellar.framework; path = "sscb swift unfuck with carthage intergration/Carthage/Build/iOS/Interstellar.framework"; sourceTree = "<group>"; };
 		264420BE20C9238500060B17 /* servus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = servus.swift; sourceTree = "<group>"; };
 		264420C020C9265300060B17 /* Servus.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Servus.framework; path = "sscb swift unfuck with carthage intergration/Carthage/Build/iOS/Servus.framework"; sourceTree = "<group>"; };
+		264EAB8C20CE343D00F2628A /* timeoutable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = timeoutable.swift; sourceTree = "<group>"; };
+		264EAB8E20CE346F00F2628A /* overflowable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = overflowable.swift; sourceTree = "<group>"; };
 		2653EC5520CDF54500A15723 /* ssbConnections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ssbConnections.swift; sourceTree = "<group>"; };
 		267D323020C6126F0025E382 /* sercretHandshake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sercretHandshake.swift; sourceTree = "<group>"; };
 		267D323320C653440025E382 /* messageBus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = messageBus.swift; sourceTree = "<group>"; };
@@ -175,10 +179,20 @@
 		264420B520C9168F00060B17 /* utils */ = {
 			isa = PBXGroup;
 			children = (
+				264EAB9020CE347400F2628A /* protocols */,
 				264420B620C916A400060B17 /* NetInfo.swift */,
 				264420BE20C9238500060B17 /* servus.swift */,
 			);
 			path = utils;
+			sourceTree = "<group>";
+		};
+		264EAB9020CE347400F2628A /* protocols */ = {
+			isa = PBXGroup;
+			children = (
+				264EAB8C20CE343D00F2628A /* timeoutable.swift */,
+				264EAB8E20CE346F00F2628A /* overflowable.swift */,
+			);
+			path = protocols;
 			sourceTree = "<group>";
 		};
 		267D323220C653300025E382 /* messageBus */ = {
@@ -299,8 +313,10 @@
 				267D323D20C7B6860025E382 /* userDefs.swift in Sources */,
 				267D323920C7A7540025E382 /* networkAdapter.swift in Sources */,
 				2653EC5620CDF54500A15723 /* ssbConnections.swift in Sources */,
+				264EAB8F20CE346F00F2628A /* overflowable.swift in Sources */,
 				267D323620C7885E0025E382 /* ssb-channel.swift in Sources */,
 				26CE343320C51B61005FC3D5 /* private-box.swift in Sources */,
+				264EAB8D20CE343D00F2628A /* timeoutable.swift in Sources */,
 				260CA92A20C4F3CF000D09D4 /* AppDelegate.swift in Sources */,
 				267D323F20C7B7100025E382 /* processUserMessages.swift in Sources */,
 				264420B720C916A400060B17 /* NetInfo.swift in Sources */,
