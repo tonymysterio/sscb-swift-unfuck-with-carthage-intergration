@@ -293,11 +293,11 @@ class userFrame {
         let hs = secretHandshake(name: friendo.name, type: handshakeType.CALL, myk: nil )
         let conn = ssbConnection(name: name, ip : ip ,inbound: false, handshaked: false, terminated: false, handshake: hs, channel : nil )
         
-        let co = friendo.connections.outgoing = conn;
+        friendo.connections.outgoing = conn;
         
         if let seMes = friendo.connections.outgoing!.handshake!.startHandshaking(targetPubKey: friendo.publicKey!) {
             
-            updateFriend(f:friendo)
+            _ = updateFriend(f:friendo)
             
             //not a null, lets handshake
             mNet?.send(sender: (self.data?.name)!, to: friendo.name, ip: friendo.ip, mess: message(delType: deliveryType.DIRECT, fromIp : self.data!.ip, sender: self.data!.name, target: friendo.name, type: messageType.HANDSHAKE_SEND1, text: "handshaka 1", data: seMes.data))
@@ -330,7 +330,7 @@ class userFrame {
         
         
         //f.connections?.handshaked = true;
-        updateFriend(f:f)
+        _ = updateFriend(f:f)
         
         
         
@@ -441,12 +441,12 @@ class userFrame {
                 
             }
             
-            if let hs = friendo?.connections.incoming {
+            if friendo?.connections.incoming != nil {
                 //continue handshake if appropriate
                 
-                if let seMes = friendo!.connections.incoming?.handshake?.receiveHandshakeSEND(data: m.data as! Data) {
+                if let seMes = friendo!.connections.incoming?.handshake?.receiveHandshakeSEND(data: m.data! ) {
                     
-                    updateFriend(f:friendo!)
+                    _ = updateFriend(f:friendo!)
                     
                     mNet?.send(sender: (self.data?.name)!, to: friendo!.name, ip: friendo!.ip, mess: message(delType: deliveryType.DIRECT, fromIp: (self.data?.ip)!, sender: self.data!.name, target: m.sender, type: messageType.HANDSHAKE_REPLY1, text: "shake reply 1", data: seMes.data))
                     
@@ -466,9 +466,9 @@ class userFrame {
             //friendo!.connections = conn; //only one for now
             friendo?.connections.incoming?.handshake = hs
             
-            updateFriend(f:friendo!)
+            _ = updateFriend(f:friendo!)
             
-            if let seMes = friendo!.connections.incoming?.handshake?.receiveHandshakeSEND(data: m.data as! Data) {
+            if let seMes = friendo!.connections.incoming?.handshake?.receiveHandshakeSEND(data: m.data! ) {
                 
                 mNet?.send(sender: (self.data?.name)!, to: friendo!.name, ip: friendo!.ip, mess: message(delType: deliveryType.DIRECT, fromIp: (self.data?.ip)!, sender: self.data!.name, target: m.sender, type: messageType.HANDSHAKE_REPLY1, text: "shake reply 1", data: seMes.data))
                 
@@ -487,22 +487,21 @@ class userFrame {
             
             guard var friendo = findFriendByIp(ip: m.fromIp) else { return }
             
-            if friendo.connections.incoming?.handshake == nil {
+            guard let fh = friendo.connections.incoming?.handshake else {
                 
                 return ;
                 
             }
             
-            var fh = friendo.connections.incoming?.handshake!
             
-            if let seMes = friendo.connections.incoming?.handshake?.receiveHandshakeSEND(data: m.data as! Data) {
+            if let seMes = friendo.connections.incoming?.handshake?.receiveHandshakeSEND(data: m.data! ) {
                 
                 
                 mNet?.send(sender: (self.data?.name)!, to: friendo.name, ip: friendo.ip, mess: message(delType: deliveryType.DIRECT, fromIp: (self.data?.name)!, sender: self.data!.name, target: m.sender, type: messageType.HANDSHAKE_REPLY2, text: "shake reply 2", data: seMes.data))
                 
                 //THIS IS A SILLY IDEA. hack for now
-                let hpke = fh!.targetEphPublicKey
-                let mske = fh!.ephKeys?.pair.secretKey
+                let hpke = fh.targetEphPublicKey
+                let mske = fh.ephKeys?.pair.secretKey
                 
                 friendo.connections.incoming?.handshaked = true;
                 friendo.connections.incoming?.channel = ssbChannel(_hisPublicKey: hpke!, _myPrivateKey: mske!)
@@ -530,9 +529,9 @@ class userFrame {
                 
             }
             
-            if let seMes = friendo.connections.outgoing?.handshake?.receiveHandshakeREPLY(data: m.data as! Data) {
+            if let seMes = friendo.connections.outgoing?.handshake?.receiveHandshakeREPLY(data: m.data!) {
                 
-                updateFriend(f:friendo)
+                _ = updateFriend(f:friendo)
                 mNet?.send(sender: (self.data?.name)!, to: friendo.name, ip: friendo.ip, mess: message(delType: deliveryType.DIRECT , fromIp: (self.data?.name)!, sender: self.data!.name, target: m.sender, type: messageType.HANDSHAKE_SEND2, text: "shake reply 2", data: seMes.data))
                 
             }
@@ -556,7 +555,7 @@ class userFrame {
             let mske = hs!.ephKeys?.pair.secretKey
             
             
-            if let seMes = hs!.receiveHandshakeREPLY(data: m.data as! Data) {
+            if let seMes = hs!.receiveHandshakeREPLY(data: m.data!) {
                 
                 //ok im happy
                 

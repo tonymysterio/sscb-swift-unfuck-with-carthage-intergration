@@ -120,7 +120,7 @@ class HWnetworkAdapter {
     
     func debuMess ( _ m : String ) {
         
-        return
+        //return
             
         concurrentQueue.async {
             
