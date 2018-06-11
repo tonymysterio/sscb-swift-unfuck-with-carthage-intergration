@@ -28,27 +28,20 @@ struct ssbConnection {
     var handshake : secretHandshake? = nil  //del handshake after done
     var channel : ssbChannel?
     
-}
-
-class ssbConnections {
-    
-    var data = [ssbConnection?]()
-    
-    func add (name:String, ip: String) -> ssbConnection? {
+    func send ( _ _message : Data ) -> Data? {
         
-        for f in data {
-            
-            if (f?.name == name) { return nil }
-            
-        }
+        if terminated { return nil }
+        return channel?.say(message: _message)
     
-        let nc = ssbConnection(name: name, ip: ip, inbound: false, handshaked: false, terminated: false, handshake: nil, channel: nil)
-        data.append(nc)
+    }
+    
+    func broadcast ( message : Data ) {
         
-        return nc
+        
     }
     
 }
+
 
 struct friend : Hashable,Equatable {
     
@@ -56,7 +49,7 @@ struct friend : Hashable,Equatable {
     var ip : String
     var publicKey : Box.PublicKey?
     var ephKey : Data?
-    var connections : ssbConnection? //ssbConnections();
+    lazy var connections = ssbConnections()
     
     var hashValue: Int {
         return name.hashValue ^ ip.hashValue &* 16777619

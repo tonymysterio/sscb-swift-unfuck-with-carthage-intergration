@@ -1751,7 +1751,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "310"
             endingLineNumber = "310"
-            landmarkName = "setKnownKeyPai(keys:)"
+            landmarkName = "handshakeFriend(name:ip:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1767,7 +1767,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "315"
             endingLineNumber = "315"
-            landmarkName = "beginHandshake(u:)"
+            landmarkName = "setKnownKeyPai(keys:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1806,7 +1806,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sscb swift unfuck with carthage intergration/sscb swift/testHarness/scuttlers/userHarness.swift"
@@ -1858,22 +1858,6 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sscb swift unfuck with carthage intergration/sscb swift/testHarness/scuttlers/userHarness.swift"
-            timestampString = "550140649.421428"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "520"
-            endingLineNumber = "520"
-            landmarkName = "processMessage(m:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "sscb swift unfuck with carthage intergration/sscb swift/testHarness/scuttlers/userHarness.swift"
             timestampString = "550140649.421999"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
@@ -1895,8 +1879,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "228"
             endingLineNumber = "228"
-            landmarkName = "updateFriend(f:)"
-            landmarkType = "7">
+            landmarkName = "userFrame"
+            landmarkType = "3">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
@@ -1992,22 +1976,6 @@
             startingLineNumber = "325"
             endingLineNumber = "325"
             landmarkName = "completeHandshake(f:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "sscb swift unfuck with carthage intergration/sscb swift/testHarness/scuttlers/userDefs.swift"
-            timestampString = "550123118.358814"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "47"
-            endingLineNumber = "47"
-            landmarkName = "add(name:ip:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2849,22 +2817,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "sscb swift unfuck with carthage intergration/sscb swift/testHarness/scuttlers/userHarness.swift"
-            timestampString = "550140649.453151"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "294"
-            endingLineNumber = "294"
-            landmarkName = "handshakeFriend(name:ip:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "sscb swift unfuck with carthage intergration/sscb swift/testHarness/networkAdapter/HWnetworkAdapter.swift"
             timestampString = "550140649.453747"
             startingColumnNumber = "9223372036854775807"
@@ -3127,8 +3079,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "323"
             endingLineNumber = "323"
-            landmarkName = "completeHandshake(f:)"
-            landmarkType = "7">
+            landmarkName = "userFrame"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3346,29 +3298,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sscb swift unfuck with carthage intergration/sscb swift/testHarness/scuttlers/userHarness.swift"
-            timestampString = "550140649.466283"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "614"
-            endingLineNumber = "614"
-            landmarkName = "processMessage(m:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "sscb swift unfuck with carthage intergration/sscb swift/testHarness/scuttlers/userHarness.swift"
             timestampString = "550140649.466767"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "624"
             endingLineNumber = "624"
-            landmarkName = "userFrame"
-            landmarkType = "3">
+            landmarkName = "processMessage(m:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3400,22 +3336,6 @@
             startingLineNumber = "592"
             endingLineNumber = "592"
             landmarkName = "processMessage(m:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "sscb swift unfuck with carthage intergration/sscb swift/testHarness/scuttlers/userHarness.swift"
-            timestampString = "550140649.4682159"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "290"
-            endingLineNumber = "290"
-            landmarkName = "handshakeFriend(name:ip:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -3479,22 +3399,6 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "551"
             endingLineNumber = "551"
-            landmarkName = "processMessage(m:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "sscb swift unfuck with carthage intergration/sscb swift/testHarness/scuttlers/userHarness.swift"
-            timestampString = "550140649.4705271"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "560"
-            endingLineNumber = "560"
             landmarkName = "processMessage(m:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -3591,22 +3495,6 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "424"
             endingLineNumber = "424"
-            landmarkName = "processMessage(m:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "sscb swift unfuck with carthage intergration/sscb swift/testHarness/scuttlers/userHarness.swift"
-            timestampString = "550140649.473009"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "441"
-            endingLineNumber = "441"
             landmarkName = "processMessage(m:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -3730,22 +3618,6 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sscb swift unfuck with carthage intergration/sscb swift/testHarness/scuttlers/userHarness.swift"
-            timestampString = "550140649.477019"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "449"
-            endingLineNumber = "449"
-            landmarkName = "processMessage(m:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "sscb swift unfuck with carthage intergration/sscb swift/testHarness/scuttlers/userHarness.swift"
             timestampString = "550140649.477834"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
@@ -3784,38 +3656,6 @@
             startingLineNumber = "116"
             endingLineNumber = "116"
             landmarkName = "send(sender:to:ip:mess:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "sscb swift unfuck with carthage intergration/sscb swift/testHarness/scuttlers/userHarness.swift"
-            timestampString = "550140649.480052"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "439"
-            endingLineNumber = "439"
-            landmarkName = "processMessage(m:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "sscb swift unfuck with carthage intergration/sscb swift/testHarness/scuttlers/userHarness.swift"
-            timestampString = "550140649.480852"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "447"
-            endingLineNumber = "447"
-            landmarkName = "processMessage(m:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -3927,6 +3767,38 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "563"
             endingLineNumber = "563"
+            landmarkName = "processMessage(m:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "sscb swift unfuck with carthage intergration/sscb swift/testHarness/scuttlers/userHarness.swift"
+            timestampString = "550373038.0255719"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "517"
+            endingLineNumber = "517"
+            landmarkName = "processMessage(m:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "sscb swift unfuck with carthage intergration/sscb swift/testHarness/scuttlers/userHarness.swift"
+            timestampString = "550373181.581108"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "444"
+            endingLineNumber = "444"
             landmarkName = "processMessage(m:)"
             landmarkType = "7">
          </BreakpointContent>
