@@ -284,7 +284,7 @@ class userFrame {
             return
             
         }
-        /*
+        
         if friendo.connections.outgoing != nil {
             //dont handshake twice
             return;
@@ -308,7 +308,7 @@ class userFrame {
             return
             
         }
- */
+ 
         
     }
     
@@ -348,14 +348,14 @@ class userFrame {
         
         //if let encryptedMessage = friendo.connections?.channel?.say(message: _message) {
         
-        /*
+        
         if let encryptedMessage = friendo.connections.outgoing?.channel?.say(message: _message) {
             
             
             mNet?.send(sender: (self.data?.name)!, to: friendo.name, ip: friendo.ip, mess: message(delType: deliveryType.DIRECT, fromIp :(self.data?.ip)!,  sender: self.data!.name, target: friendo.name, type: messageType.SAY, text: "", data: encryptedMessage))
             
         }
-        */
+        
         
     }
     
@@ -439,11 +439,11 @@ class userFrame {
                 //return
                 //add a friend and we dont know his key yet
                 mNet?.debuMess ("added a new friend whos trying to handshake "+m.sender)
-                friendo = addFriend(friend: friend(name: m.sender, ip: m.text!, publicKey: m.data, ephKey: nil, connections: ssbConnections() ))
+                friendo = addFriend(friend: friend(name: m.sender, ip: m.text!, publicKey: m.data, ephKey: nil , connections: ssbConnections() ))
                 
             }
             
-            /*
+            
             if friendo?.connections.incoming != nil {
                 //continue handshake if appropriate
                 
@@ -459,6 +459,10 @@ class userFrame {
                     
                 }
                 return;
+            } else {
+                
+                friendo?.connections.incoming = ssbConnection(name: friendo!.name, ip: friendo!.ip, inbound: true, handshaked: false, terminated: false, handshake: nil, channel: nil)
+                
             }
             
             //create a connections obj
@@ -479,7 +483,7 @@ class userFrame {
                 
                 mNet?.debuMess("messageType.HANDSHAKE_SEND1 trouble at sea")
                 
-            } */
+            }
             
         
             
@@ -489,7 +493,7 @@ class userFrame {
             //remember to update frendo
             
             guard var friendo = findFriendByIp(ip: m.fromIp) else { return }
-            /*
+            
             guard let fh = friendo.connections.incoming?.handshake else {
                 
                 return ;
@@ -514,7 +518,7 @@ class userFrame {
                 
                 
                 
-            } */
+            }
         
     case messageType.HANDSHAKE_REPLY1 :
             
@@ -524,7 +528,7 @@ class userFrame {
                 
             }
             
-            /*if friendo.connections.outgoing == nil {
+            if friendo.connections.outgoing == nil {
                 
                 //let the guy handshaakka
                 //got a reply for my owns send. if i havent initiated handshake , drop this
@@ -539,7 +543,7 @@ class userFrame {
                 
             }
             
-            */
+            
             
         case messageType.HANDSHAKE_REPLY2 :
             
@@ -551,7 +555,7 @@ class userFrame {
                 
             }
             
-            /*
+            
             if friendo.connections.outgoing?.handshake == nil { return }
             let hs = friendo.connections.outgoing?.handshake
             
@@ -573,7 +577,7 @@ class userFrame {
                 
                 
                 
-            } */
+            }
             
         case messageType.SAY :
             
@@ -624,14 +628,14 @@ class userFrame {
                 return;
             }
             
-            return;
+            //return;
             
             //TODO verify the passed pub key
             
             let name = String(decoding: m.data!, as: UTF8.self)
             
             //add this exciting new acquintance immediately and start handshaking, baby
-            if let friendo = addFriend(friend: friend(name: name , ip: m.fromIp, publicKey: m.data, ephKey: nil, connections: ssbConnections())) {
+            if let friendo = addFriend(friend: friend(name: name , ip: m.fromIp, publicKey: m.data, ephKey: nil, connections: ssbConnections() )) {
                 
                 handshakeFriend(name: friendo.name , ip : friendo.ip )
                 

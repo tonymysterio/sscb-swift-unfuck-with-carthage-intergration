@@ -71,3 +71,36 @@ class ssbConnections {
     }*/
     
 }
+
+
+
+
+struct ssbConnection {
+    
+    var name : String
+    var ip : String
+    var inbound = false;
+    var handshaked = false;
+    var terminated = false;
+    //var keys : handshakeKeys
+    var handshake : secretHandshake? = nil  //del handshake after done
+    var channel : ssbChannel?
+    
+    func send ( _ _message : Data ) -> Data? {
+        
+        if terminated { return nil }
+        return channel?.say(message: _message)
+        
+    }
+    
+    func broadcast ( message : Data ) {
+        
+        
+    }
+    
+}
+
+
+
+
+

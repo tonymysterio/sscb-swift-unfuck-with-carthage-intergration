@@ -16,40 +16,14 @@ struct scuttlers  {
     
 }
 
-
-struct ssbConnection {
-    
-    var name : String
-    var ip : String
-    var inbound = false;
-    var handshaked = false;
-    var terminated = false;
-    //var keys : handshakeKeys
-    var handshake : secretHandshake? = nil  //del handshake after done
-    var channel : ssbChannel?
-    
-    func send ( _ _message : Data ) -> Data? {
-        
-        if terminated { return nil }
-        return channel?.say(message: _message)
-    
-    }
-    
-    func broadcast ( message : Data ) {
-        
-        
-    }
-    
-}
-
-
 struct friend : Hashable,Equatable {
     
     var name :String
     var ip : String
     var publicKey : Box.PublicKey?
     var ephKey : Data?
-    lazy var connections = ssbConnections()
+    var connections = ssbConnections()
+    
     
     var hashValue: Int {
         return name.hashValue ^ ip.hashValue &* 16777619

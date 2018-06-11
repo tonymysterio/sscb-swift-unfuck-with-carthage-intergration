@@ -1,4 +1,4 @@
 github "JensRavens/Interstellar" "2.2.0"
 github "airalex/Servus" "v0.2.0"
-github "jedisct1/swift-sodium" "0.6"
+github "marching-cube/swift-sodium" "0.6"
 github "swiftsocket/SwiftSocket" "2.0.2"

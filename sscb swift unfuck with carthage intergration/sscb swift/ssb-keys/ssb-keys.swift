@@ -103,6 +103,7 @@ class ssbKeys {
 //curves.ed25519 = require('./sodium')
     func generate () -> Box.KeyPair? {
         
+        //_ = sodium.advanced
         //let secretkey = sodium.secretStream.xchacha20poly1305.key()
         return sodium.box.keyPair()!    //original returns json
         
