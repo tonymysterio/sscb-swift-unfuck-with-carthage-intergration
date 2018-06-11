@@ -51,7 +51,7 @@ class ssbConnections {
             return nil;
         }
         
-        
+        return nil
         
     }
     
