@@ -66,28 +66,46 @@ class SsbKeysTest {
         let senders = ["a","b","c","d"]
         var sendco = 0;
         
-        var sink = overflowableSink(maxItems: 10,maxItemsPerSource: 3)
+        var sink = overflowableSink(maxItems: 10,maxItemsPerSource: 3, maxData: 100000 )
         //var mu = 1;
         
         var f = 0 ;
         while (f<5000) {
             
             var mu = (sendco + 1) * (sendco + 2);
-            var daa = bsData(mult: mu)
+            var daa = bcsData(mult: mu)
             let mo = String(daa.count) + " bytes from " + senders[sendco] + " = "+String(mu)
             print (mo);
             
+            var totco = 0;
             var hap = sink._push(senders[sendco], daa )
-            if (hap == sinkResponse.DROP) {
+            if (hap == sinkResponse.USER_DROP) {
+                print("user drop for ")
+                print (senders[sendco])
+                let cz = sink._currentSizeInBytes
+                
+                print("current size sink")
+                print (cz);
+                
+                continue
+            }
+            if (hap == sinkResponse.OVERFLOW_DROP) {
+                let cz = sink._currentSizeInBytes
+                
+                print("current size sink")
+                print (cz);
                 
                 let sout = sink._pull(_maxBytes: networkSpeed._2g_slow.rawValue)
                 let its = sout?.count
-                var totco = 0;
+                
                 for x in sout! {
                     totco = totco + x._data.count
                 }
                 
-                let zillo = 1;
+                print("pulled from sink")
+                print (its)
+                print (totco)
+                print("-----")
                 
             }
             

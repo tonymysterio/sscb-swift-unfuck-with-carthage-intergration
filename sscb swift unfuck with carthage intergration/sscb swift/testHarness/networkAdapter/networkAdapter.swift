@@ -20,7 +20,7 @@ class networkAdapter {
     
     var mb : messageBus?
     var hwb : HWnetworkAdapter?
-    var outgoingSink = overflowableSink(maxItems: 10,maxItemsPerSource: 3)
+    var outgoingSink = overflowableSink(maxItems: 10,maxItemsPerSource: 3 ,maxData : 100000)
     var outgoingSinkSending = false;
     
     init (_mb : messageBus) {
